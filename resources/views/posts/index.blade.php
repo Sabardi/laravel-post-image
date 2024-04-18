@@ -34,7 +34,7 @@
                               @forelse ($posts as $post)
                                 <tr>
                                     <td class="text-center">
-                                        <img src="{{ asset('/public/asset/img'.$post->image) }}" class="rounded" style="width: 150px">
+                                        <img src="{{ url('/gambar/'.$post->image) }}" class="rounded" style="width: 150px">
                                     </td>
                                     <td>{{ $post->title }}</td>
                                     <td>{!! $post->content !!}</td>

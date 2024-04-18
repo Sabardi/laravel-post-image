@@ -46,12 +46,20 @@ class PostController extends Controller
         ]);
 
         //upload image
-        $image = $request->file('image');
-        $image->storeAs('public/asset/img', $image->hashName());
+        // $image = $request->file('image');
+        // $image->storeAs('public/asset/img', $image->hashName());
 
+        //upload image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->hashName();
+            $destination = 'gambar';
+            $image = $image->move($destination, $imageName);
+
+        }
         //create post
         Post::create([
-            'image'     => $image->hashName(),
+            'image'     => $imageName,
             'title'     => $request->title,
             'content'   => $request->content
         ]);
