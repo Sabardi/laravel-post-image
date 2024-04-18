@@ -107,22 +107,25 @@ public function show(string $id): View
                 'content'   => 'required|min:10'
             ]);
 
+
             //get post by ID
             $post = Post::findOrFail($id);
+
 
             //check if image is uploaded
             if ($request->hasFile('image')) {
 
                 //upload new image
                 $image = $request->file('image');
-                $image->storeAs('public/posts', $image->hashName());
+                $imageName = $image->hashName();
+                $destination = 'gambar';
 
                 //delete old image
-                Storage::delete('public/posts/'.$post->image);
+                $image = $image->move($destination, $imageName);
 
                 //update post with new image
                 $post->update([
-                    'image'     => $image->hashName(),
+                    'image'     => $imageName,
                     'title'     => $request->title,
                     'content'   => $request->content
                 ]);
