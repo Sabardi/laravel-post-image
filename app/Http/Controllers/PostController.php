@@ -47,7 +47,7 @@ class PostController extends Controller
 
         //upload image
         $image = $request->file('image');
-        $image->storeAs('public/img', $image->hashName());
+        $image->storeAs('public/asset/img', $image->hashName());
 
         //create post
         Post::create([
